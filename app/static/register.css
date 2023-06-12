@@ -1,0 +1,24 @@
+/* Author: Jonathan Fuhrman */
+/* this page provides stylesheets for register.html */
+
+/* Defines a gradient background for an element */
+.gradient-custom {
+    background: rgb(247, 105, 0);
+
+    background: -webkit-linear-gradient(to bottom right, rgb(255, 106, 0), rgb(249, 170, 90));
+
+    background: linear-gradient(to bottom right, rgb(248, 175, 115), rgb(255, 106, 0))
+}
+
+/* Defines properties for a select input element */
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+/* Defines properties for the select arrow icon */
+.card-registration .select-arrow {
+    top: 13px;
+}

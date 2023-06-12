@@ -1,0 +1,21 @@
+/* authot: jonathan fuhrman */
+
+
+:root {
+    --primary: rgb(247, 105, 0); /*sets the primary color to an RGB value of (247, 105, 0). */
+    --dark: #21252f; /*sets the dark color to a hex code of #21252f.*/
+    --body: #888; /*sets the body color to a hex code of #888.*/
+    --box-shadow: 0 8px 22px rgb(0, 0, 0, 0.1); /*sets the box shadow to a value of 0 8px 22px with a color of rgba(0, 0, 0, 0.1).*/
+}
+
+
+.main {
+    background-color: rgb(225, 219, 219); /*sets the background color of elements with the "main" class to an RGB value of (225, 219, 219).*/
+    border: 1px; /*sets the border of elements with the "main" class to 1 pixel.*/
+    min-height: 50px; /*sets the minimum height of elements with the "main" class to 50 pixels.*/
+    font-size: 2rem; /*sets the font size of elements with the "main" class to 2 rem units.*/
+}
+
+.bg {
+    background-color: rgb(231, 154, 101); /*sets the background color of elements with the "bg" class to an RGB value of (231, 154, 101).*/
+}

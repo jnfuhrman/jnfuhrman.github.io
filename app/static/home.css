@@ -1,0 +1,327 @@
+/* Author: Jonathan Fuhrman */
+/* this stylesheet css is used across many html pages in our website */
+
+/* imports the Google font Sora with two font weights (400 and 700) and specifies that it should be used as a replacement for the default font in the page */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap'); 
+
+/* sets the default values for some CSS variables that can be used later in the code. */
+:root {
+    --primary: rgb(247, 105, 0);
+    --dark: #21252f;
+    --body: #888;
+    --box-shadow: 0 8px 22px rgb(0, 0, 0, 0.1);
+}
+
+/* defines a class for an element with a gradient background that goes from one color to another. */
+.gradient-custom {
+    /* fallback for old browsers */
+    background: rgb(247, 105, 0);
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgb(255, 106, 0), rgb(249, 170, 90));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgb(248, 175, 115), rgb(255, 106, 0))
+}
+
+/* sets the font family,line height,and color of the body text. */
+.body {
+    font-family: "Sora", sans-serif;
+    line-height: 1.7;
+    color: var(--body);
+}
+
+/* sets the font color and weight for all heading elements and a class called "display-4" . */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 .display-4 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+/* sets the color and text decoration for all links. */
+a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+/* 
+These lines define the link styles for links with a class "loginlinks" 
+when they are in different states: link,hover,and active. 
+*/
+a.loginlinks:link {
+text-decoration: underline;
+}
+
+/* 
+These lines define the link styles for links with a class "loginlinks" 
+when they are in different states: link,hover,and active. 
+*/
+a.loginlinks:hover {
+color: rgb(255, 125, 0);
+text-decoration: underline;
+}
+
+/* 
+These lines define the link styles for links with a class "loginlinks" 
+when they are in different states: link,hover,and active. 
+*/
+a.loginlinks:active {
+color: blue;
+text-decoration: underline;
+}
+
+/* defines the box-shadow for a navigation bar. */
+.navbar {
+    box-shadow: var(--box-shadow);
+}
+
+/* sets the style for a button element,including background color,border width,radius,and color on hover. */
+.btn {
+    background-color: rgb(247, 105, 0);
+    padding: 14px 18px;
+    border-width: 2px;
+    border-radius: 0;
+    border: 1px solid rgb(247, 105, 0);
+    padding: 10px 14px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: rgb(255, 118, 13);
+    color: rgb(0, 0, 0);
+    border-color: rgb(33, 37, 41);
+
+}
+
+/* sets the background image and some styles for a hero section of the page. */
+.hero {
+    background-image: url('/static/background.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 2;
+}
+
+.hero::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(21, 20, 51, 0.5);
+    z-index: -1;
+}
+
+/* sets the padding for all section elements. */
+section {
+    padding-top: 110px;
+    padding-bottom: 100px;
+}
+
+/* sets the style for a card element,including box-shadow and background color on hover. */
+.card-effect {
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    padding: 25px;
+    transition: all 0.30s ease;
+}
+
+.card-effect:hover {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+/* sets the style for an icon box element. */
+.iconbox {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: white;
+    font-size: 32px;
+    border-radius: 100px;
+    flex: none;
+}
+
+/* sets the style for a service element,including a hover effect. */
+.service {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.service::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background-color: var(--primary);
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.service:hover .iconbox {
+    background-color: white;
+    color: var(--primary);
+}
+
+.service:hover h5,
+.service:hover p {
+    color: white;
+}
+
+.service:hover::after {
+    opacity: 1;
+    top: 0;
+}
+
+/* These classes set the background image and some styles for two columns of the page. */
+.col-img {
+    background-image: url('/static/student.png');
+    background-position: center;
+    background-size: cover;
+    min-height: 500px;
+}
+
+/* These classes set the background image and some styles for two columns of the page. */
+.col-img1 {
+    background-image: url('/static/student1.png');
+    background-position: center;
+    background-size: cover;
+    min-height: 500px;
+}
+
+/* sets the style for an image element. */
+.team-member img {
+    width: 120px;
+    height: auto;
+    border-radius: 100px;
+}
+
+/* sets the style for a group of social media icons. */
+.social-icons {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons a {
+    width: 34px;
+    height: 34px;
+    background-color: var(--primary);
+    border-radius: 2px solid var(--primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    margin-left: 5px;
+    transition: all 0.4s ease;
+    border: 2px solid var(--primary);
+}
+
+/* These lines set the style for form input elements. */
+.social-icons a:hover {
+    color: var(--primary);
+    background-color: transparent;
+    border-color: var(--primary);
+}
+
+.form input.form-control {
+    height: 66px;
+
+}
+
+form .form-control {
+    border: transparent;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.04)
+}
+
+/* sets the display property for an element with an ID of "prof_filter" to inline. */
+#prof_filter {
+    display:inline-block;}
+#star_filter {
+    display:inline-block;}
+
+.star_checks {
+    list-style: none;
+}
+.prof_checks {
+    list-style: none;
+}
+
+/* Sets the text color to orange using an RGB value for the element with class "text_orange" */
+.text_orange {
+    color: rgb(247, 105, 0);
+}
+
+/* Defines position, margin, and cursor for the first info icon. */
+.info-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+/* Shows the popup for the first info icon when hovered over. */
+.info-icon:hover .popup {
+    display: block;
+}
+
+/* Defines position,display,and cursor for the second info icon. */
+.info-icon2 {
+    position: sticky;
+    display: inline-block;
+    z-index: 0;
+    margin: 0.5rem;
+    left: 20px;
+    cursor: ppointer;
+}
+
+/* Shows the popup for the second info icon when hovered over. */
+.info-icon2:hover .popup2 {
+    display: block;
+}
+
+/* Defines properties for the popup that shows up with the first info icon. */
+.popup {
+    position: absolute;
+    width: 300px;
+    top: 30px;
+    right: 0px;
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px grey;
+    display: none;
+}
+
+/* Defines properties for the popup that shows up with the second info icon. */
+.popup2 {
+    position: absolute;
+    width: 300px;
+    top: 30px;
+    right: -150px;
+    z-index: 999;
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px grey;
+    display: none;
+    white-space: normal;
+    color: black;
+}

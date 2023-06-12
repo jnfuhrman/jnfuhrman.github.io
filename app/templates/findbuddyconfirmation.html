@@ -1,0 +1,60 @@
+<!-- Author: Jonathan Fuhrman, Alec Marcus -->
+<!-- Page: findbuddyconfirmation.html -->
+<!-- Objective: This page is the design and structure of the confirmation page that alerts the buddy sender that the invitation request has been sent.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!--Start of meta data-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Start of title-->
+    <title>Confirmation Find Buddy</title>
+     <!--Start of CSS files-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!--Start of linking external stylesheet-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <!--Start of linking external CSS file-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <link rel="stylesheet" href="/static/home.css">
+    <!--Start of internal CSS-->
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(255, 106, 0), rgb(249, 170, 90));
+        }
+    
+        .gradient-custom {
+            background: linear-gradient(to right, rgb(255, 106, 0), rgb(249, 170, 90));
+        }
+    </style>
+    
+</head>
+
+<body>
+     <!--Start of center tag-->
+
+    <center>
+        <!--Start of card-->
+        <div class="card bg-dark" style="width: 70%; margin-top: 15%; width: 50%;">
+            <!--Start of card header-->
+            <div class="card-header" style="color: white;">
+                Pending Buddy Relation Status
+            </div>
+             <!--Start of card body-->
+            <div class="card-body">
+                <h5 class="card-title" style="color: white;">An email is on the way!</h5>
+                <p class="card-text" style="color: white;">{{msg}}</p>
+                <a href="{{url_for('findstudybuddy.findBuddy')}}" class="btn btn-primary">Select More Buddies</a>
+            </div>
+        </div>
+    </center>
+
+</body>
+</html>
+
+<!--after you select a buddy, email would be sent to reciever gives u a link to go back to find buddy page tell user invitation has been sent, u can select more buddies by clicking on link-->

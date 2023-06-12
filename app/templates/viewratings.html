@@ -1,0 +1,135 @@
+<!-- Author: Jonathan Fuhrman, Matt Failoa -->
+<!-- Page: viewratings.html -->
+<!-- Objective: structure and design for view ratings page
+-->
+
+<!-- Start of HTML document with language set to English -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head section with metadata -->  
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Set title of the webpage -->
+    <title>View Ratings</title>
+      <!-- Link to Bootstrap CSS stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+         <!-- Link to Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+
+        </script>
+<!-- Link to Bootstrap CSS stylesheet again -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Link to a custom CSS file -->
+    <link rel="stylesheet" href="static/home.css">
+    <!-- Link to Boxicons CSS stylesheet -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Set character encoding to UTF-8 again -->
+    <meta charset="UTF-8">
+    <!-- Specify compatibility mode for Internet Explorer again -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set title of the webpage again -->
+    <title>View Materials</title>
+    <!-- Set some custom CSS styles -->
+<style>
+        body {
+            background: linear-gradient(to right, rgb(255, 106, 0), rgb(249, 170, 90));
+        }
+    
+        .gradient-custom {
+            background: linear-gradient(to right, rgb(255, 106, 0), rgb(249, 170, 90));
+        }
+</style>
+
+</head>
+<!-- Head End -->
+
+<!-- start of Body --> 
+<body>
+    
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top bg-dark">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="{{url_for('dashboard.dashboard')}}">
+                    <!-- Logo image -->
+                <img src="{{url_for('static', filename='logo-study-buddy.png')}}" , width="220" height="65">
+            </a>
+            <!-- Navbar toggler for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 20%;">
+                <button class="btn ms-4">
+                    <a href="{{url_for('findstudybuddy.findBuddy')}}">Buddy Search</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('subjectselection.subjectSelection')}}">Subject Select</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('materialsview.materialsView')}}">View Materials</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('viewratings.viewRatings')}}">View Ratings</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('profile.profile')}}">Profile</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('auth.login')}}">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- end of nav bar section-->
+
+    <!-- Main content section-->
+    <section class="vh-100">
+        <div class="container py-1 h-50">
+            <div class="row ml-2 justify-content-center align-items-center h-100"> <!-- align content -->
+                <div class="col-12 col-lg-9 col-xl-7">
+                        <center>
+                            <form method="POST" action="">
+                            {{ form.hidden_tag() }}
+                            <br> <!-- blank space -->
+                            <!-- table format -->
+                            <table border="2" cellpadding="5" cellspacing="5" style="background-color: white;">
+                            <tr> <!-- row -->
+                                <th>Date</th> <!-- header of a cell -->
+                                <th>Course</th> <!-- header of a cell course -->
+                                <th>Rating</th> <!-- header of a cell sender -->
+                                <th>Given By</th> <!-- header of a cell Name -->
+                                <th>Comments</th> <!-- header of a cell Content-->
+                            </tr> <!-- end of row -->
+                            <!-- information getting displayed inside table -->
+                            {% for br in buddy_rating %}
+                            <tr> <!-- row -->
+                                <td>{{ br.month }}/{{ br.year }}</td> <!-- date for the date -->
+                                <td> {{br.buddy_relation.study_interest.course.course_name}}</td> <!-- data for the course name-->
+                                <td>{{ br.buddy_rate }}</td> <!-- data for the rate given -->
+                                <td>{{ br.sender.first_name }} {{br.sender.last_name}}</td> <!-- data for the first name & last name -->
+                                <td>{{ br.comment }}</td> <!-- short description of document -->
+                            </tr> <!-- end of row -->
+                            {% endfor %}
+                            </table>
+
+                            <!--{{ form.view_rating_but }}-->
+                            <br> <!-- blank space -->
+                            
+                        </form>
+                    </center>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

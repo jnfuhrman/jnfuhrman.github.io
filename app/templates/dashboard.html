@@ -1,0 +1,257 @@
+<!-- Author: Jonathan Fuhrman, Aaron Alakkadan, Alec Marcus, Matt Failoa -->
+<!-- Page: dashboard.html -->
+<!-- Objective: This is the structure and design of the dashboard page. here the user can view his connections, check on pending status, share materials, make ratings and remove connections.
+-->
+
+<!-- Start of HTML document with language set to English -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head section with metadata -->
+<head>
+
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Study Buddy</title> <!-- title of the page -->
+    <!--links the Bootstrap CSS stylesheet from a CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!--links the Font Awesome CSS stylesheet from a CDN.-->    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" 
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--links custom CSS stylesheet called "home.css" located in a subdirectory named "static".-->
+    <link rel="stylesheet" href="static/home.css">
+    <!--links custom CSS stylesheet called "star-rating-svg.css" located in a subdirectory named "static".-->
+    <link rel="stylesheet" type="text/css" href="static/star-rating-svg.css">
+
+</head>
+<!-- Head End -->
+
+<!-- start of Body -->
+<body class="bg">
+
+    <!-- Nav Bar Section. Nav Bar will stay visable if you scroll down and it has a dark background-->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top bg-dark">
+        <div class="container-fluid">
+            <!-- Nav Bar Study Buddy Logo-->
+            <a class="navbar-brand" href="{{url_for('dashboard.dashboard')}}">
+                <img src="{{url_for('static', filename='logo-study-buddy.png')}}" , width="220" height="65">
+            </a>
+            
+            <!-- Navbar toggler for small screens -->
+            <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> 
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 20%;">
+                <button class="btn ms-4">
+                    <a href="{{url_for('findstudybuddy.findBuddy')}}">Buddy Search</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('subjectselection.subjectSelection')}}">Subject Select</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('materialsview.materialsView')}}">View Materials</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('viewratings.viewRatings')}}">View Ratings</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('profile.profile')}}">Profile</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('auth.login')}}">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- end of nav bar section-->
+
+    <!-- Main content section-->
+    <section class="gradient-custom"> <!-- gradient custom background located in CSS home style sheet -->
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <!-- 
+                        first section: rewards points, which displays the users total rewards points
+                    -->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px; margin-top: 10px;">
+                        <div class="card-body p-1 p-md-3">
+                            <h1 style="color: white;">Reward Points: {{user.total_reward_points}}</h1>
+                         </div>
+                    </div>
+
+                    <!-- 
+                        Second Section: Connections, which displays all the connections made, their information and what courses 
+                        you are studying for. Moreover, it also displays options to share materials and reviews to your 
+                        connections. Last but not least, theres a feature to remove a connections 
+                    -->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px; margin-top: 10px;">
+                    <div class="card-body p-1 p-md-5">
+                        <h1 style="color: white;">Your connections</h1>
+                        <div class="row mb-2">
+                        <div class="col-lg-12">
+                        <div class="d-flex flex-column">
+                        {% for b in br_connections %}
+                            {% if user.username == b.sender.username %}
+                            <div class="card card-effect mb-2">
+                                <div class="row g-0">
+                            <div class="col-md-3">
+                                <img src="{{url_for('static', filename='user.png')}}" alt="{{b.receiver.first_name}} {{b.receiver.last_name}}" class="img-fluid team-member"
+                                style="max-width: 100px; max-height: fit-content;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                <h5 class="card-title">{{b.receiver.first_name}} {{b.receiver.last_name}}</h5>
+                                <p class = "card-text">Subject: {{b.study_interest.course.course_name}}</p>
+                                <p class = "card-text">Email: {{b.receiver.username}}</p>
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-circle-info fa-2xl" style="color: #f76900;"></i>
+                                    <div class="popup">
+                                      <p>Phone Number: {{b.receiver.phone_number}} <br> About Me: {{b.receiver.about_me}}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                                </div>
+                                <a class="btn m-1" role="button" href="{{url_for('materialsupload.materialsUpload')}}?id={{b.id}}">Material Upload</a>
+                                <a class="btn m-1" role="button" href="{{url_for('rate.rate')}}?id={{b.id}}">Rate Buddy</a>
+                                <a class="btn m-1" role="button" href="{{url_for('removebuddy.removeBuddy')}}?id={{b.id}}">Remove Buddy</a>
+                            </div>
+                            {% else %}
+                            <div class="card card-effect mb-2">
+                                <div class="row g-0">
+                                <div class="col-md-3">
+                                <img src="{{url_for('static', filename='user.png')}}" alt="{{b.sender.first_name}} {{b.sender.last_name}}" class="img-fluid team-member"
+                                style="max-width: 100px; max-height: fit-content;">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{b.sender.first_name}} {{b.sender.last_name}}</h5>
+                                        <p class = "card-text">Subject: {{b.study_interest.course.course_name}}</p>
+                                        <p class = "card-text">Email: {{b.sender.username}}</p>
+                                        <div class="info-icon">
+                                            <i class="fa-solid fa-circle-info fa-2xl" style="color: #f76900;"></i>
+                                        <div class="popup">
+                                            <p>Phone Number: {{b.sender.phone_number}} <br> About Me: {{b.sender.about_me}}</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <a class="btn m-1" role="button" href="{{url_for('materialsupload.materialsUpload')}}?id={{b.id}}">Material Upload</a>
+                                <a class="btn m-1" role="button" href="{{url_for('rate.rate')}}?id={{b.id}}">Rate Buddy</a>
+                                <a class="btn m-1" role="button" href="{{url_for('removebuddy.removeBuddy')}}?id={{b.id}}">Remove Buddy</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!--
+                        Third section: Pending Invitations, which displays the connections that are in progress 
+                        which the user have to accept or decline
+                    -->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px; margin-top: 10px;">
+                        <div class="card-body p-1 p-md-5">
+                            <h1 style="color: white;">Pending Invitations</h1>
+                            <div class="row mb-2">
+                            <div class="col-lg-12">
+                                <div class="d-flex flex-column">
+                                {% for b in br %}
+                                {% if b.invitation_status == 'S' %}
+                                    <div class="card card-effect mb-2">
+                                        <a href="{{url_for('findstudybuddy.invitation')}}?id={{b.id}}">
+                                    <div class="row g-0">
+                                    <div class="col-md-3">
+                                        <img src="{{url_for('static', filename='user.png')}}" alt="{{b.sender.first_name}} {{b.sender.last_name}}" class="img-fluid team-member"
+                                        style="max-width: 100px; max-height: fit-content;">
+                                    </div>
+                                    <div class="col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{b.sender.first_name}} {{b.sender.last_name}}</h5>
+                                        <p class="card-text">Subject: {{b.study_interest.course.course_name}}</p>
+                                    </div>
+                                    </div>
+                                    </div>
+                                        </a>
+                                    </div>
+                                {% endif %}    
+                                {% endfor %}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                                        
+                    <!--
+                    Third section: Subjects, which displays list of subjects that the user selected with the proficiency score and
+                    star rating for each. 
+                    -->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px; margin-top: 10px;"> <!--style="border-radius: 15px;-->
+                            <div class="card-body"> 
+                                <div class="row" style="margin-top: 25px; margin-bottom: 25px; margin-left: 25px; margin-right: 25px;"> <!--mb-5-->
+                                    <center><h1 style="color: white;" >Subjects</h1></center>
+                                    <center><form method="POST" action="">
+                                    {{ form.hidden_tag() }}
+                                    <div style="color: white;">
+                                    {% for s in si_all %}
+                                        {{s.course.subject_code}}
+                                        {{s.course.course_number}}
+                                        {{s.course.course_name}}
+                                        <br>
+                                        Proficiency Score: {{s.pro_score}}
+                                        <br>
+                                        Star Rating: {{s.buddy_star_rating}}
+                                        <div id="star-{{s.course.course_number}}" class="my-rating" data-rating="{{s.buddy_star_rating}}">
+
+                                        </div>
+                                        
+                                        <br>
+                                    {% endfor %}
+                                    </div>
+                                    </form></center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- CDN imports-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="static/star-rating-svg.js"></script>
+
+    <script>
+        //Javascript function which displays the start rating on the dashboard
+        $(function(){
+            $(".my-rating").starRating({ 
+                            onHover: function(i,r, $el) {alert($el)},
+                            starSize: 25,
+                            readOnly: true,
+                            initialRating: $(this).data("star"),
+                            totalStars: 5
+                                        })
+        })  
+    </script>
+
+    <script>
+        // displays user information in a pop-up after you hover over the information icon using Javascript
+        const infoIcon = document.querySelector('.info-icon');
+        const popup = document.querySelector('.popup');
+    
+        infoIcon.addEventListener('click', function() {
+        popup.classList.toggle('show');
+        });
+    </script>
+</body>
+
+</html>  
