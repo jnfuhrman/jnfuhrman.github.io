@@ -1,0 +1,123 @@
+<!-- Author: Jonathan Fuhrman, Aaron Alakkadan-->
+<!-- Page: rate.html -->
+<!-- Objective: the structure and design for rating a buddy
+-->
+
+<!-- Start of HTML document with language set to English -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head section with metadata -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--links the Bootstrap CSS stylesheet from a CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="js/bootstrap.js"></script>
+    
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/home.css">
+
+    <title>Rating</title> <!-- title -->
+</head>
+<!-- Head End -->
+
+<!--start of buddy-->
+<body>
+
+    <!-- Nav Bar Section. Nav Bar will stay visable if you scroll down and it has a dark background-->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top bg-dark">
+        <div class="container-fluid">
+            <!-- Nav Bar Study Buddy Logo-->
+            <a class="navbar-brand" href="{{url_for('dashboard.dashboard')}}">
+                <img src="{{url_for('static', filename='logo-study-buddy.png')}}" , width="220" height="65">
+            </a>
+            <!-- Navbar toggler for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 20%;">
+                <button class="btn ms-4">
+                    <a href="{{url_for('findstudybuddy.findBuddy')}}">Buddy Search</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('subjectselection.subjectSelection')}}">Subject Select</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('materialsview.materialsView')}}">View Materials</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('viewratings.viewRatings')}}">View Ratings</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('profile.profile')}}">Profile</a>
+                </button>
+                <button class="btn ms-4">
+                    <a href="{{url_for('auth.login')}}">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- end of nav bar section-->
+
+    <!-- Main content section-->
+    <section style="font-size: 125%;" class="gradient-custom text-white">
+        <div class="container vh-50  py-5 h-20">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <!--start of card-->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px; padding-left: 20%;">
+                        <div class="card-body p-5 p-md-5">
+                            <form method="POST" action="">
+                            {{ form.hidden_tag() }}
+                            <div>
+                            <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">Buddy you are Rating: </label>
+                                {{ buddy.first_name }} <!-- first name of buddy -->
+                                {{ buddy.last_name }} <!-- last name of buddy -->
+                            </div>
+                                <!-- course name that you are rating for -->
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">Subject for Buddy you are Rating: </label>
+                                {{ br.study_interest.course.course_name}}
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">Select Month</label>
+                                {{ form.month }} <!-- month which rating taking place -->
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">Select Year</label>
+                                {{ form.year }} <!-- year which rating taking place -->
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">{{form.is_score_improved.label}}</label>
+                                {{ form.is_score_improved }} <!-- did grades improve? -->
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">{{form.is_gained_knowledge.label}}</label>
+                                {{ form.is_gained_knowledge}} <!-- did the user gain knowdlegde -->
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">{{form.buddy_rate.label}}</label>
+                                {{ form.buddy_rate}} <!-- rating buddy on a 1-5 scale -->
+                                </div>
+                                <div>
+                                    <label style="margin-left: 0px; margin-top: 25px; color: rgb(255, 255, 255);">{{form.comment.label}}</label>
+                                {{ form.comment}} <!-- any comments for the buddy -->
+                                {{ form.rate_but }} <!-- submission button-->
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

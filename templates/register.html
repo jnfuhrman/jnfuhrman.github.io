@@ -1,0 +1,126 @@
+<!-- Author: Jonathan Fuhrman, Aaron Alakkadan -->
+<!-- Page: register.html -->
+<!-- Objective: the design and structure for the register page where the user signs up
+-->
+
+<!-- Start of HTML document with language set to English -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head section with metadata -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SU Study Buddy Sign-Up</title> <!-- title of the page -->
+    <!--links the Bootstrap CSS stylesheet from a CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!--links to style.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/register.css">
+
+</head>
+<!-- Head End -->
+
+<!-- start of Body -->
+<body>
+    <!-- Nav Bar Section. Nav Bar will stay visable if you scroll down and it has a dark background-->
+    <nav class="navbar navbar-expand-lg py- sticky-top bg-dark">
+        <div class="container-fluid">
+            <!-- Nav Bar Study Buddy Logo-->
+            <a class="navbar-brand" href="{{url_for('auth.home')}}">
+                <center><img src="{{url_for('static', filename='logo-study-buddy.png')}}" , width="230" height="65"></center>
+            </a>
+        </div>
+    </nav>
+    <!-- main content -->
+    <section class="vh-100 gradient-custom"> <!-- sets background to gradient custom -->
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100"> <!-- aligns content -->
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <!-- card starts -->
+                    <div class="card bg-dark shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <form method="POST" action=""> <!-- form -->
+                                <center>
+                                <div class="form-group">
+                                    {{form.hidden_tag()}}
+                                    <label class="text-white" for="emailAddress">
+                                        First Name
+                                    </label>
+                                    <br> <!-- blank space -->
+                                    {{form.first_name}}
+                                </div>
+                                </center>
+                                <p></p> <!-- blank space -->
+                                <center>
+                                    <div class="form-group">
+                                        <label class="text-white" for="emailAddress">Last Name</label>
+                                        <br> <!-- blank space -->
+                                        {{form.last_name}} <!-- first name -->
+                                    </div>
+                                </center>
+                                <p></p> <!-- blank space -->
+                                <center>
+                                    <div class="form-group">
+                                        <label class="text-white" for="emailAddress">SU email</label>
+                                        <br> <!-- blank space -->
+                                        {{form.username}} <!-- last name -->
+                                    </div>
+                                </center>
+                                <p></p> <!-- blank space -->
+                                <center>
+                                    <div class="form-group">
+                                        <label class="text-white" for="exampleInputPassword1">PASSWORD</label>
+                                        <br> <!-- blank space -->
+                                        {{form.password}} <!-- password input box -->
+                                    </div>
+                                </center>
+                                <p></p> <!-- blank space -->
+                                <center>
+                                    <div class="form-group">
+                                        <label class="text-white" for="exampleInputPassword1">Re-enter Password</label>
+                                        <br> <!-- blank space -->
+                                        {{form.re_enter_password}} <!-- re enter password input box -->
+                                    </div>
+                                </center>
+                                <p></p> <!-- blank space -->
+                                <center>{{form.submit}}</center> <!-- submit button -->
+                                <div class="row">
+                                    <center><a href="{{url_for('auth.login')}}">Have an account? Signin Here</a></center>
+                                </div>
+                                <div class="row" class="text-white">
+                                    <p>{{msg}}</p> <!-- error message if incorrectly signed up -->
+                                </div>
+                                
+                                <center>
+                                    <!-- displaying user name errors, color set to white -->
+                                    <u1 class="text-white">
+                                    {% for error in form.username.errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                </u1>
+                                <!-- displaying password errors, color set to white -->
+                                <ul class="text-white">
+                                    {% for error in form.password.errors %}
+                                    <li>{{ error }}</li>
+                                
+                                    {% endfor %}
+                                </ul></center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+</body>
+</html>

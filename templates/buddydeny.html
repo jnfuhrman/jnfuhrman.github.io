@@ -1,0 +1,53 @@
+<!-- Author: Jonathan Fuhrman, Matt Failoa, Aaron Alakkadan, Alec Marcus -->
+<!-- Page: buddydeny.html -->
+<!-- Objective: This page is the design and structure of the email sent to a user when he is rejected by a another user to connect.
+-->
+
+<!-- Start of HTML document with language set to English -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head section with metadata -->
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<!-- Head End -->
+
+<!-- Start of body section -->
+<body>
+  <!-- Main container with font and background settings -->
+  <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;width:600px;height:100%;background-color:#fafafa;padding:15px">
+
+    <!-- Logo header with background color -->
+    <div style="background-color: #F96800;">
+      <center>
+        <img src="cid:lock" width="220" height="65" alt="sb image" />
+      </center>
+    </div>
+
+    <!-- Text content with font and color settings -->
+    <div style="color:#3c3c3c;margin:10px auto;padding:15px">
+      <p style="font-size:16px;font-weight:400;line-height:24px;margin:0 0 20px 0;text-align:center;color:#1b1b26">
+        Hi <b>{{ first_name }} {{last_name}}</b>, Sorry your buddy invitation request has been declined {{current_user.first_name}} {{current_user.last_name}} <br>Try to select another buddy 
+      </p>
+
+     <!-- Login button with font, color, and margin settings -->
+     <div style="margin:24px 193px 0px 146px">
+       <a href={{url}}><button 
+            type="button" style="font-size:14px;font-weight:500;border:0;background-color:#F96800;font-weight:500;
+              line-height:27px;width:230px;height:49px;text-align:center;color:white;margin:10px 24px 11px 24px;
+                border-radius:4px"><span class="il">Login</span> To Your <span class="il">Account</span></button></a>
+     </div>
+
+      <!-- Contact support link with font, color, and alignment settings -->
+       <p style="font-size:16px;font-weight:400;text-align:center;color:#1b1b26">
+         Questions? <a style="color:#007fad" href="https://sustudybuddy.com/#contact" target="_blank">Contact Support</a>
+       </p>
+   </div>
+</div>
+</body>
+</html>
+
